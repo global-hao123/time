@@ -1,6 +1,6 @@
 /*
 *	UI component for get server time and date format
-*	V1.0.0
+*	V1.1.0
 *	@Frank Feng
 */
 
