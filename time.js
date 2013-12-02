@@ -96,6 +96,21 @@ Gl.time = function () {
 			_date.ss = date.getSeconds() < 10 ? "0" + date.getSeconds() : date.getSeconds();
 
 			return _date;
+		},
+
+		/**
+		 * Set Date object's time zone
+		 * @param {String} tz   Timezone string, eg. '+8', '-2'
+		 * @param {Date Obj} date The date Object you want to set, if empty it will use the server time.
+		 */
+		setTimezone: function (tz, date) {
+			var _date = new Date();
+
+			date = date ? date : Gl.time.getTime();
+
+			_date.setTime(_date.getTime() + date.getTimezoneOffset() * 6e4 + tz * 36e5);
+
+			return _date;
 		}
 	}
 }();
