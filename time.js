@@ -16,7 +16,8 @@ Gl.time = function () {
 		isGet = false,	//whether has got the server time
 		_date;
 	return {
-		getTime: function (onReady) {
+		getTime: function (callback) {
+			//add callback parameter for other modules to do their own business after obtaining the server time
 			//get the time difference to prevent the errors which caused by users changed the local time
 			//two ways to fix the bug: 1. setInterval 2. local time difference, the 2nd way takes precedence
 
@@ -47,19 +48,19 @@ Gl.time = function () {
 					error: function() {
 						//if there has an error such as 404, we can also get the head
 						render(xhr);
-						onReady && onReady();
+						callback && callback();
 					},
 					success: function(data, textStatus, jqXHR) {
 						render(jqXHR);
-						onReady && onReady();
+						callback && callback();
 					}
 				});
 			};
 
 			if(!isGet){
-				get(onReady);
+				get();
 			}else{
-				onReady && onReady();
+				callback && callback();
 			}
 
 			return _date ? _date : new Date;
